@@ -70,8 +70,7 @@ export interface GrafanaJavascriptAgentConfig {
   consoleInstrumentalizationEnabled: boolean;
   webVitalsInstrumentalizationEnabled: boolean;
   apiKey: string;
-  tracingEnabled: boolean;
-  otlpTracesEndpoint?: string;
+  tracingInstrumentationEnabled: boolean;
 }
 
 export interface UnifiedAlertingConfig {

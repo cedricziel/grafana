@@ -48,7 +48,7 @@ describe('GrafanaJavascriptAgentEchoBackend', () => {
       id: '504',
       orgId: 1,
     },
-    tracingEnabled: false,
+    tracingInstrumentationEnabled: false,
   };
 
   it('will set up FetchTransport if customEndpoint is provided', async () => {

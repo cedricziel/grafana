@@ -4,11 +4,9 @@ import { BatchSpanProcessor } from '@opentelemetry/sdk-trace-web';
 import { TracingInstrumentation } from '@grafana/faro-web-tracing';
 
 interface Options {
-  otlpEndpoint: string;
+  otlpEndpoint?: string;
 }
 
 export function initTracingInstrumentation(options: Options) {
-  return new TracingInstrumentation({
-    spanProcessor: new BatchSpanProcessor(new OTLPTraceExporter({ url: options.otlpEndpoint })),
-  });
+  return new TracingInstrumentation();
 }

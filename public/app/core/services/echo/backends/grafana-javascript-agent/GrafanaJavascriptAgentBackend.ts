@@ -21,7 +21,7 @@ export interface GrafanaJavascriptAgentBackendOptions extends BrowserConfig {
   errorInstrumentalizationEnabled: boolean;
   consoleInstrumentalizationEnabled: boolean;
   webVitalsInstrumentalizationEnabled: boolean;
-  tracingEnabled: boolean;
+  tracingInstrumentationEnabled: boolean;
   otlpTracesEndpoint?: string;
 }
 
@@ -75,14 +75,9 @@ export class GrafanaJavascriptAgentBackend
     };
     this.faroInstance = initializeFaro(grafanaJavaScriptAgentOptions);
 
-    const otlpEndpoint = options.otlpTracesEndpoint;
-    if (options.tracingEnabled && otlpEndpoint) {
+    if (options.tracingInstrumentationEnabled) {
       import('./tracing').then((tracing) => {
-        this.faroInstance.instrumentations.add(
-          tracing.initTracingInstrumentation({
-            otlpEndpoint,
-          })
-        );
+        this.faroInstance.instrumentations.add(tracing.initTracingInstrumentation({}));
       });
     }
 

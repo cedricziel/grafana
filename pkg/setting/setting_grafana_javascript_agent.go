@@ -8,8 +8,7 @@ type GrafanaJavascriptAgent struct {
 	ErrorInstrumentalizationEnabled     bool   `json:"errorInstrumentalizationEnabled"`
 	ConsoleInstrumentalizationEnabled   bool   `json:"consoleInstrumentalizationEnabled"`
 	WebVitalsInstrumentalizationEnabled bool   `json:"webVitalsInstrumentalizationEnabled"`
-	TracingEnabled                      bool   `json:"tracingEnabled"`
-	OTLPTracesEndpoint                  string `json:"otlpTracesEndpoint"`
+	TracingInstrumentationEnabled       bool   `json:"tracingInstrumentationEnabled"`
 	ApiKey                              string `json:"apiKey"`
 }
 
@@ -25,8 +24,7 @@ func (cfg *Cfg) readGrafanaJavascriptAgentConfig() {
 			ErrorInstrumentalizationEnabled:     raw.Key("instrumentations_errors_enabled").MustBool(true),
 			ConsoleInstrumentalizationEnabled:   raw.Key("instrumentations_console_enabled").MustBool(true),
 			WebVitalsInstrumentalizationEnabled: raw.Key("instrumentations_webvitals_enabled").MustBool(true),
-			TracingEnabled:                      raw.Key("tracing_enabled").MustBool(false),
-			OTLPTracesEndpoint:                  raw.Key("otlp_traces_endpoint").MustString(""),
+			TracingInstrumentationEnabled:       raw.Key("instrumentations_tracing_enabled").MustBool(true),
 			ApiKey:                              raw.Key("api_key").String(),
 		}
 	}
