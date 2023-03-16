@@ -50,7 +50,7 @@ import (
 	"github.com/grafana/grafana/pkg/web"
 )
 
-var plog = log.New("api")
+var apilog = log.New("api")
 
 // registerRoutes registers all API HTTP routes.
 func (hs *HTTPServer) registerRoutes() {

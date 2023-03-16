@@ -145,12 +145,12 @@ func resourceSpansToRows(rs ptrace.ResourceSpans) ([][]interface{}, error) {
 
 func spanToSpanRow(span ptrace.Span, libraryTags pcommon.InstrumentationScope, resource pcommon.Resource) ([]interface{}, error) {
 	// If the id representation changed from hexstring to something else we need to change the transformBase64IDToHexString in the frontend code
-	traceID := span.TraceID().HexString()
+	traceID := span.TraceID().String()
 	traceID = strings.TrimPrefix(traceID, strings.Repeat("0", 16))
 
-	spanID := span.SpanID().HexString()
+	spanID := span.SpanID().String()
 
-	parentSpanID := span.ParentSpanID().HexString()
+	parentSpanID := span.ParentSpanID().String()
 	startTime := float64(span.StartTimestamp()) / 1_000_000
 	serviceName, serviceTags := resourceToProcess(resource)
 
@@ -373,10 +373,10 @@ func spanLinksToReferences(links ptrace.SpanLinkSlice) []*TraceReference {
 	for i := 0; i < links.Len(); i++ {
 		link := links.At(i)
 
-		traceId := link.TraceID().HexString()
+		traceId := link.TraceID().String()
 		traceId = strings.TrimLeft(traceId, "0")
 
-		spanId := link.SpanID().HexString()
+		spanId := link.SpanID().String()
 
 		tags := make([]*KeyValue, 0, link.Attributes().Len())
 		link.Attributes().Range(func(key string, attr pcommon.Value) bool {

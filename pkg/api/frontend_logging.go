@@ -74,7 +74,10 @@ func GrafanaJavascriptAgentLogMessageHandler(store *frontendlogging.SourceMapSto
 		}
 
 		if event.Traces != nil && event.Traces.ResourceSpans().Len() > 0 {
-			hs.TelemetryExporter.ExportTraces(context.Background(), event.Traces.Traces)
+			err := hs.TelemetryExporter.ExportTraces(context.Background(), event.Traces.Traces)
+			if err != nil {
+				hs.log.Error("could not export traces", "err", err)
+			}
 		}
 
 		// Meta object is standard across event types, adding it globally.

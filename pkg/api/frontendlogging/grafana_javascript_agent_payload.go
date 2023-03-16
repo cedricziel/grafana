@@ -189,11 +189,11 @@ func SpanToKeyVal(s ptrace.Span) *KeyVal {
 		KeyValAdd(kv, "end_timestamp", s.StartTimestamp().AsTime().String())
 	}
 	KeyValAdd(kv, "kind", "span")
-	KeyValAdd(kv, "traceID", s.TraceID().HexString())
-	KeyValAdd(kv, "spanID", s.SpanID().HexString())
+	KeyValAdd(kv, "traceID", s.TraceID().String())
+	KeyValAdd(kv, "spanID", s.SpanID().String())
 	KeyValAdd(kv, "span_kind", s.Kind().String())
 	KeyValAdd(kv, "name", s.Name())
-	KeyValAdd(kv, "parent_spanID", s.ParentSpanID().HexString())
+	KeyValAdd(kv, "parent_spanID", s.ParentSpanID().String())
 	s.Attributes().Range(func(k string, v pcommon.Value) bool {
 		KeyValAdd(kv, "attr_"+k, fmt.Sprintf("%v", v))
 		return true

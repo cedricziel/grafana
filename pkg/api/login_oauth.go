@@ -327,11 +327,11 @@ func (hs *HTTPServer) buildExternalUserInfo(token *oauth2.Token, userInfo *socia
 			var orgID int64
 			if hs.Cfg.AutoAssignOrg && hs.Cfg.AutoAssignOrgId > 0 {
 				orgID = int64(hs.Cfg.AutoAssignOrgId)
-				plog.Debug("The user has a role assignment and organization membership is auto-assigned",
+				apilog.Debug("The user has a role assignment and organization membership is auto-assigned",
 					"role", userInfo.Role, "orgId", orgID)
 			} else {
 				orgID = int64(1)
-				plog.Debug("The user has a role assignment and organization membership is not auto-assigned",
+				apilog.Debug("The user has a role assignment and organization membership is not auto-assigned",
 					"role", userInfo.Role, "orgId", orgID)
 			}
 			extUser.OrgRoles[orgID] = rt
